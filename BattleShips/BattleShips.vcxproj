@@ -124,15 +124,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AircraftCarrier.h" />
+    <ClInclude Include="Battleship.h" />
+    <ClInclude Include="Carrier.h" />
+    <ClInclude Include="Cruiser.h" />
+    <ClInclude Include="Destroyer.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Map.h" />
-    <ClInclude Include="Sector.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Ship.h" />
+    <ClInclude Include="Submarine.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Battleship.cpp" />
+    <ClCompile Include="Carrier.cpp" />
+    <ClCompile Include="Cruiser.cpp" />
+    <ClCompile Include="Destroyer.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="Submarine.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

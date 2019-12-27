@@ -7,10 +7,16 @@
 class Ship
 {
 public:
-	Ship(int lenght, int x, int y, std::string name, bool persp);
+	Ship(int lenght, std::string name);
+	Ship(const Ship &Ship);
 	~Ship();
 
 	int GetLenght();
+	static void ResetShipsCount();
+	static int ShipsCount();
+
+private:
+	static int count;
 
 protected:
 	int lenght, x, y;

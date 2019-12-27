@@ -1,19 +1,36 @@
 #include "Ship.h"
 
-Ship::Ship(int lenght, int x, int y, std::string name, bool persp)
+int Ship::count = 0;
+
+Ship::Ship(int lenght, std::string name)
 {
 	this->lenght = lenght;
-	this->x = x;
-	this->y = y;
 	this->name = name;
-	this->persp = persp;
+	count++;
+}
+
+Ship::Ship(const Ship& Ship)
+{
+	this->lenght = Ship.lenght;
+	this->name = Ship.name;
 }
 
 Ship::~Ship()
 {
+	count--;
 }
 
 int Ship::GetLenght()
 {
 	return lenght;
+}
+
+void Ship::ResetShipsCount()
+{
+	count = 0;
+}
+
+int Ship::ShipsCount()
+{
+	return count;
 }

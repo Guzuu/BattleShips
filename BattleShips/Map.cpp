@@ -1,5 +1,4 @@
 #include "Map.h"
-#include <iostream>
 
 Map::Map(int size)
 {
@@ -12,7 +11,7 @@ Map::~Map()
 {
 }
 
-void Map::AddShip(Ship *s, bool persp, int x, int y)
+int Map::AddShip(Ship *s, bool persp, int x, int y)
 {
 
 	if (persp) { //adding ship Horizontaly
@@ -20,14 +19,15 @@ void Map::AddShip(Ship *s, bool persp, int x, int y)
 			for (int i = x; i < x + s->GetLenght(); i++) {
 				if (size <= i || map[i][y].occup) {
 					std::cout << "Cannot place ship at " << i << char(y + 65) << "\n Make different placement." << std::endl;
-					std::cin >> persp >> x >> y;
-					AddShip(s, persp, x, y);
+					
+					AddShipRand(s);
+					return 0;
 				}
 			}
-		}
-		for (int i = x; i < x + s->GetLenght(); i++) {
-			map[i][y].occup = true;
-			map[i][y].symbol = 'S';
+			for (int i = x; i < x + s->GetLenght(); i++) {
+				map[i][y].occup = true;
+				map[i][y].symbol = 'S';
+			}
 		}
 	}
 	else { //adding ship Verticaly
@@ -35,16 +35,18 @@ void Map::AddShip(Ship *s, bool persp, int x, int y)
 			for (int i = y; i < y + s->GetLenght(); i++) {
 				if (size <= i || map[x][i].occup) {
 					std::cout << "Cannot Place Ship at " << x << char(i + 65) << "\n Make different placement." << std::endl;
-					std::cin >> persp >> x >> y;
-					AddShip(s, persp, x, y);
+					
+					AddShipRand(s);
+					return 0;
 				}
 			}
-		}
-		for (int i = y; i < y + s->GetLenght(); i++) {
-			map[x][i].occup = true;
-			map[x][i].symbol = 'S';
+			for (int i = y; i < y + s->GetLenght(); i++) {
+				map[x][i].occup = true;
+				map[x][i].symbol = 'S';
+			}
 		}
 	}
+	return 0;
 }
 
 void Map::Hit(int x, int y)
