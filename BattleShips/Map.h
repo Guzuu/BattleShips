@@ -18,7 +18,7 @@ public:
 
 private:
 	struct Sector {
-		bool hit = false; //sector hit
+		bool chk = false; //sector checked
 		bool occup = false; //ship occupying sector
 		char symbol = ' ';
 	};

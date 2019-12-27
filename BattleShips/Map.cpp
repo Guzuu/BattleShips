@@ -16,12 +16,30 @@ void Map::AddShip(Ship *s, bool persp, int x, int y)
 {
 
 	if (persp) { //adding ship Horizontaly
+		if (size > y) {
+			for (int i = x; i < x + s->GetLenght(); i++) {
+				if (size <= i || map[i][y].occup) {
+					std::cout << "Cannot place ship at " << i << char(y + 65) << "\n Make different placement." << std::endl;
+					std::cin >> persp >> x >> y;
+					AddShip(s, persp, x, y);
+				}
+			}
+		}
 		for (int i = x; i < x + s->GetLenght(); i++) {
 			map[i][y].occup = true;
 			map[i][y].symbol = 'S';
 		}
 	}
 	else { //adding ship Verticaly
+		if (size > x) {
+			for (int i = y; i < y + s->GetLenght(); i++) {
+				if (size <= i || map[x][i].occup) {
+					std::cout << "Cannot Place Ship at " << x << char(i + 65) << "\n Make different placement." << std::endl;
+					std::cin >> persp >> x >> y;
+					AddShip(s, persp, x, y);
+				}
+			}
+		}
 		for (int i = y; i < y + s->GetLenght(); i++) {
 			map[x][i].occup = true;
 			map[x][i].symbol = 'S';
@@ -35,7 +53,7 @@ void Map::Hit(int x, int y)
 		map[x][y].symbol = 'X';
 	}
 	else {
-		map[x][y].hit = true; //mark sector as checked
+		map[x][y].chk = true; //mark sector as checked
 		map[x][y].symbol = 'O';
 	}
 }
@@ -45,9 +63,9 @@ void Map::DrawMap()
 	std::cout << " ";
 	for (int x = 0; x < size; x++) {  //Numbers first row
 		if (x > 9) {
-			std::cout << " " << x + 1 << " ";
+			std::cout << " " << x << " ";
 		}
-		else std::cout << "  " << x + 1 << " ";
+		else std::cout << "  " << x << " ";
 	}
 	std::cout << " " << std::endl << " ";
 
