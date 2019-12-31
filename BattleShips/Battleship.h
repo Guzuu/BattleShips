@@ -8,8 +8,8 @@
 class Battleship : public Ship
 {
 public:
-	Battleship(int lenght = 4, std::string name = "Battleship");
-	Battleship(const Battleship* Bts);
+	Battleship(Player* owner, int lenght = 4, std::string name = "Battleship");
+	Battleship(Player* owner, const Battleship& Bts);
 	~Battleship();
 
 private:

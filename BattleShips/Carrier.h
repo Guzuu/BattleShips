@@ -8,8 +8,8 @@
 class Carrier: public Ship
 {
 public:
-	Carrier(int lenght = 5, std::string name = "Carrier");
-	Carrier(const Carrier* Carr);
+	Carrier(Player* owner, int lenght = 5, std::string name = "Carrier");
+	Carrier(Player* owner, const Carrier& Carr);
 	~Carrier();
 
 private:

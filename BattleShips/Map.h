@@ -16,46 +16,76 @@
 class Map
 {
 public:
-	Map(int size);
+	Map(Player* player, int size);
 	~Map();
 
 	template <class T>
-	void AddShipRand(T* ship);
+	void RandPlacement(T* ship);
+	template <class T>
+	void UserPlacement(T* ship);
 
-	int AddShip(Ship* s, bool persp, int x, int y);
-	void Hit(int x, int y);
-	void DrawMap();
+	int AddShip(Ship* ship);
+	int Shoot();
+	static void DrawMap(Map *m1, Map *m2, int size);
+
+	Player* GetPlayer();
 
 private:
 	struct Sector {
 		bool chk = false; //sector checked
 		bool occup = false; //ship occupying sector
-		char symbol = ' ';
+		char allysymbol = ' ';
+		char enemysymbol = ' ';
+		Ship* ship;
 	};
 	int size; //square map size
 	Sector **map;
+	Player* player;
 };
 
 #endif // !_Map_h
 
 template<class T>	//Makes Random Position variables
-inline void Map::AddShipRand(T* ship)
+inline void Map::RandPlacement(T* ship)
 {
-	bool persp;
-	int x, y;
-	persp = rand() % 2;
+	ship->SetPersp(rand() % 2); //Picks perspective
 
-	if (persp) {
-		x = rand() % (size - ship->GetLenght() +1);
-		y = rand() % size;
+	if (ship->GetPersp()) {
+		ship->SetX(rand() % (size - ship->GetLenght() + 1)); //Calculates possible horizontal positions with given ship lenght 
+		ship->SetY(rand() % size);
 	}
 	else {
-		x = rand() % size;
-		y = rand() % (size - ship->GetLenght() +1);
+		ship->SetX(rand() % size);
+		ship->SetY(rand() % (size - ship->GetLenght() + 1)); //Calculates possible vertical positions with given ship lenght
 	}
 
-	std::cout << persp << x << y<<std::endl;
+	if (!AddShip(ship)) {
+		RandPlacement(ship);
+	}
+}
 
-	AddShip(ship, persp, x, y);
+template<class T>
+inline void Map::UserPlacement(T* ship)
+{
+	int coordX;	//using for boolean perspective alignment also 
+	char coordY;
+
+	std::cout << "Pick alignment\n1 - Horizontal(__)\n0 - Vertical(|)\n";
+	std::cin >> coordX;
+	while (coordX != 0 && coordX != 1) {
+		std::cout << "Couldnt determine alignment from " << coordX << ". Please try again\n";
+		std::cin >> coordX;
+	}
+	ship->SetPersp(coordX);
+
+	std::cout << "\n Pick coords X and Y\n";
+	std::cin >> coordX >> coordY;
+	ship->SetX(coordX);
+	ship->SetY(coordY-65);
+	
+	if (!AddShip(ship)) {
+		std::cout << "Couldnt Place ship at " << ship->GetX() << char(ship->GetY() + 65) << ". Please input valid coordinates\n";
+		UserPlacement(ship);
+	}
 }
 

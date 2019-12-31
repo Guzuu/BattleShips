@@ -3,25 +3,33 @@
 #define _Ship_h
 
 #include <string>
+#include <iostream>
+#include "Player.h"
 
 class Ship
 {
 public:
-	Ship(int lenght, std::string name);
-	Ship(const Ship &Ship);
+	Ship(Player* owner, int lenght, std::string name);
+	Ship(Player *, const Ship& ship);
 	~Ship();
 
-	int GetLenght();
-	static void ResetShipsCount();
-	static int ShipsCount();
+	int GetLenght();	//Getters
+	int GetX();
+	int GetY();
+	bool GetPersp();
+	Player* GetOwner();
 
-private:
-	static int count;
+	void SetX(int x);	//Setters
+	void SetY(int y);
+	void SetPersp(bool persp);
+
+	void ShipHit();
 
 protected:
-	int lenght, x, y;
+	int lenght, x, y, health;
 	std::string name;
 	bool persp;
+	Player *owner; //p1, p2, bot etc
 };
 
 #endif // !_Ship_h

@@ -8,8 +8,8 @@
 class Destroyer :public Ship
 {
 public:
-	Destroyer(int lenght = 2, std::string name = "Destroyer");
-	Destroyer(const Destroyer* Dst);
+	Destroyer(Player* owner, int lenght = 2, std::string name = "Destroyer");
+	Destroyer(Player* owner, const Destroyer& Dst);
 	~Destroyer();
 
 private:

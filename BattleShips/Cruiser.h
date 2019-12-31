@@ -8,8 +8,8 @@
 class Cruiser : public Ship
 {
 public:
-	Cruiser(int lenght = 3, std::string name = "Cruiser");
-	Cruiser(const Cruiser* Cru);
+	Cruiser(Player* owner, int lenght = 3, std::string name = "Cruiser");
+	Cruiser(Player* owner, const Cruiser& Cru);
 	~Cruiser();
 
 private:

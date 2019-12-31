@@ -6,12 +6,18 @@
 #include "Ship.h"
 #include "Carrier.h"
 #include "Battleship.h"
+#include "Human.h"
+#include "Bot.h"
 
 class Game
 {
 public:
 	Game();
 	~Game();
+
+	void FastGame();
+	void Standard();
+	int Arcade();
 
 private:
 

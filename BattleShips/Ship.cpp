@@ -1,23 +1,24 @@
 #include "Ship.h"
 
-int Ship::count = 0;
-
-Ship::Ship(int lenght, std::string name)
+Ship::Ship(Player* owner, int lenght, std::string name)
 {
+	this->owner = owner;
 	this->lenght = lenght;
 	this->name = name;
-	count++;
+	this->health = lenght;
 }
 
-Ship::Ship(const Ship& Ship)
+Ship::Ship(Player *owner, const Ship& ship)
 {
-	this->lenght = Ship.lenght;
-	this->name = Ship.name;
+	this->owner = owner;
+	this->lenght = ship.lenght;
+	this->name = ship.name;
+	this->health = ship.lenght;
 }
 
 Ship::~Ship()
 {
-	count--;
+	owner->DecShips();
 }
 
 int Ship::GetLenght()
@@ -25,12 +26,48 @@ int Ship::GetLenght()
 	return lenght;
 }
 
-void Ship::ResetShipsCount()
+int Ship::GetX()
 {
-	count = 0;
+	return x;
 }
 
-int Ship::ShipsCount()
+int Ship::GetY()
 {
-	return count;
+	return y;
+}
+
+bool Ship::GetPersp()
+{
+	return persp;
+}
+
+Player* Ship::GetOwner()
+{
+	return owner;
+}
+
+void Ship::SetX(int x)
+{
+	this->x = x;
+}
+
+void Ship::SetY(int y)
+{
+	this->y = y;
+}
+
+void Ship::SetPersp(bool persp)
+{
+	this->persp = persp;
+}
+
+void Ship::ShipHit()
+{
+	std::cout<<
+	health--;
+	if (health == 0) {
+		std::cout<< name << " has been destroyed\n";
+		std::cout <<owner->GetName() << " has " << owner->GetShipsCount()-1<<" ships remaining\n";
+		this->~Ship();
+	}
 }

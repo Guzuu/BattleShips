@@ -1,7 +1,2 @@
-﻿  Game.cpp
-  Main.cpp
-  Map.cpp
-  Menu.cpp
-  Generating Code...
-C:\Users\Mateusz\source\repos\BattleShips\BattleShips\Main.cpp(5,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+﻿  Map.cpp
   BattleShips.vcxproj -> C:\Users\Mateusz\source\repos\BattleShips\x64\Debug\BattleShips.exe
