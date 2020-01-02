@@ -25,10 +25,13 @@ public:
 	void UserPlacement(T* ship);
 
 	int AddShip(Ship* ship);
-	int Shoot();
+	void Shoot(int x, int y);
 	static void DrawMap(Map *m1, Map *m2, int size);
 
-	Player* GetPlayer();
+	Player* GetPlayer(); //Getters
+	int GetSize();
+	bool GetSectorCheck(int x, int y);
+	bool WasShipHit(int x, int y, bool sunk = false);
 
 private:
 	struct Sector {

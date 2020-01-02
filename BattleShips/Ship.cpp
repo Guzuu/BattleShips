@@ -63,11 +63,11 @@ void Ship::SetPersp(bool persp)
 
 void Ship::ShipHit()
 {
-	std::cout<<
+	std::cout << name << " has been damaged\n";
 	health--;
 	if (health == 0) {
 		std::cout<< name << " has been destroyed\n";
-		std::cout <<owner->GetName() << " has " << owner->GetShipsCount()-1<<" ships remaining\n";
 		this->~Ship();
+		std::cout <<owner->GetName() << " has " << owner->GetShipsCount()<<" ships remaining\n";
 	}
 }

@@ -3,6 +3,7 @@
 #define _Player_h
 
 #include <string>
+#include <iostream>
 
 class Player
 {
@@ -18,8 +19,7 @@ public:
 
 protected:
 	std::string name;
-	int id, ships;
-	static int PlayersCount;
+	int id, ships=0;
 
 };
 #endif // !_Player_h
