@@ -22,10 +22,11 @@ private:
 	};
 	int move;
 
-	bool EoSOM = false;
+	bool EoSoM = false;
 	bool _2Hits = false;
 	Coords Moves[7];
-	Coords LastHit;
+	Coords FirstHit;
+	Coords LastHit
 };
 
 #endif // !_Bot_h

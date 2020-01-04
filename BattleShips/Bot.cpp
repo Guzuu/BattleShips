@@ -41,6 +41,21 @@ void Bot::MakeMove(Map* m)
 
 		m->Shoot(Moves[move].x, Moves[move].y);
 	}
+	else if (EoSoM && move > 0 && m->WasShipHit(Moves[move].x, Moves[move].y)) { //If there are next moves planned and last shot was a hit
+		LastHit = Moves[move];
+
+		int tempx, tempy;
+
+		tempx = LastHit.x - Moves[move].x + LastHit.x;
+		tempy = LastHit.y - Moves[move].y + LastHit.y;
+		if (tempx >= 0 && tempx < m->GetSize() && tempy >= 0 && tempy < m->GetSize() && !(m->GetSectorCheck(tempx, tempy))) {
+			move++;
+			Moves[move].x = tempx;
+			Moves[move].y = tempy;
+		}
+
+		m->Shoot(Moves[move].x, Moves[move].y);
+	}
 
 	else if (move > 0 && m->WasShipHit(Moves[move].x, Moves[move].y)) { //If there are next moves planned and last shot was a hit
 		LastHit = Moves[move];
@@ -84,5 +99,5 @@ void Bot::MakeMove(Map* m)
 		std::cout << name << " Shoots at " << x << char(y + 65) << std::endl;
 
 		m->Shoot(x, y);
-	/*}*/
+	}
 }
