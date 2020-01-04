@@ -20,9 +20,12 @@ private:
 		int x;
 		int y;
 	};
-/*
-	Coords PrevMove;
-	Coords NextMoves[5];*/
+	int move;
+
+	bool EoSOM = false;
+	bool _2Hits = false;
+	Coords Moves[7];
+	Coords LastHit;
 };
 
 #endif // !_Bot_h
