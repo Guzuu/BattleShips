@@ -29,9 +29,9 @@ public:
 	static void DrawMap(Map *m1, Map *m2, int size);
 
 	Player* GetPlayer(); //Getters
-	int GetSize();
-	bool GetSectorCheck(int x, int y);
-	bool WasShipHit(int x, int y, bool sunk = false);
+	int GetSize(); //returns size of the map
+	bool GetSectorCheck(int x, int y); //returns check status of the sector
+	bool WasShipHit(int x, int y); 
 
 private:
 	struct Sector {

@@ -13,11 +13,11 @@ void Game::FastGame()
 {
 
 	std::cout << "Fast Mode\n\n";
-	Bot* p1 = new Bot();
-	Bot* p2 = new Bot();
+	Bot* p1 = new Bot("Bot1");
+	Bot* p2 = new Bot("Bot2");
 
-	Map* map = new Map(p1, 6);
-	Map* map2 = new Map(p2, 6);
+	Map* map = new Map(p1, 12);
+	Map* map2 = new Map(p2, 12);
 
 	Carrier* s1 = new Carrier(p1);
 	Carrier* s2 = new Carrier(p2);
@@ -33,13 +33,11 @@ void Game::FastGame()
 	map->RandPlacement(s5);
 	map2->RandPlacement(s6);
 
-	Map::DrawMap(map, map2, 6);
-
 	while (p1->GetShipsCount() != 0 && p2->GetShipsCount() != 0) {
 		p1->MakeMove(map2);
-		Map::DrawMap(map, map2, 6);
+		Map::DrawMap(map2, map, 12);
 		p2->MakeMove(map);
-		Map::DrawMap(map2, map, 6);
+		Map::DrawMap(map, map2, 12);
 	}
 
 	if (p1->GetShipsCount() == 0) std::cout << p2->GetName() << " Wins!\n";

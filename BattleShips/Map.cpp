@@ -62,11 +62,11 @@ void Map::Shoot(int x, int y)
 
 void Map::DrawMap(Map *m1, Map *m2, int size)
 {
-	std::cout << m2->player->GetName();
+	std::cout << m1->player->GetName();
 	for (int x = 0; x < size - m2->player->GetName().length() + 29; x++) {
 		std::cout << " ";
 	}
-	std::cout << m1->player->GetName() << std::endl;
+	std::cout << m2->player->GetName() << std::endl;
 
 	for (int x = 0; x < size; x++) {  //Numbers first row
 		if (x > 9) {
@@ -126,7 +126,7 @@ bool Map::GetSectorCheck(int x, int y)
 	return map[x][y].chk;
 }
 
-bool Map::WasShipHit(int x, int y, bool sunk)
+bool Map::WasShipHit(int x, int y)
 {
 	if (map[x][y].occup && map[x][y].chk) return true;
 	else return false;

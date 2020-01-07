@@ -20,13 +20,16 @@ private:
 		int x;
 		int y;
 	};
-	int move;
+	int move=0;
+	int hits=0;
+	int shots = 0;
 
-	bool EoSoM = false;
-	bool _2Hits = false;
+	bool EoSoM = false; //end of ship or map
+
 	Coords Moves[7];
 	Coords FirstHit;
-	Coords LastHit
+	Coords SecondHit;
+	Coords LastHit[2];
 };
 
 #endif // !_Bot_h
