@@ -15,7 +15,7 @@ Bot::~Bot()
 void Bot::MakeMove(Map* m)
 {
 	if (hits < 2) {
-		if (shots == 0) {	//If last shot was a miss and no next moves are planned
+		if (shots == 0) {	//Fresh Move
 
 			int x, y;
 			x = rand() % m->GetSize();
@@ -85,46 +85,47 @@ void Bot::MakeMove(Map* m)
 	}
 	else {
 		int tempx, tempy;
-		move++;
-
-			tempx = LastHit[1].x - LastHit[0].x + LastHit[1].x;
-			tempy = LastHit[1].y - LastHit[0].y + LastHit[1].y;
-			if (tempx >= 0 && tempx < m->GetSize() && tempy >= 0 && tempy < m->GetSize() && !(m->GetSectorCheck(tempx, tempy))) {
-				m->Shoot(tempx, tempy);
-				if (!(m->WasShipHit(tempx, tempy)))
-				{
-					if (EoSoM) {	//Ship sunk for sure
-						move = 0;
-						hits = 0;
-						shots = 0;
-					}
-					else {			//first ship end rotate movement 
-						EoSoM = true;
-						LastHit[0] = SecondHit;
-						LastHit[1] = FirstHit;
-					}
-				}
-				else { 
-					LastHit[0] = LastHit[1];
-					LastHit[1].x = tempx;
-					LastHit[1].y = tempy;
-				}
-			}
-			else {					//end of map
-				if (EoSoM) {		//Ship sunk for sure 
+		tempx = LastHit[1].x - LastHit[0].x + LastHit[1].x;
+		tempy = LastHit[1].y - LastHit[0].y + LastHit[1].y;
+		if (tempx >= 0 && tempx < m->GetSize() && tempy >= 0 && tempy < m->GetSize() && !(m->GetSectorCheck(tempx, tempy))) {	//check if this area is shootable meaning its valid location
+			std::cout << name << " Shoots at " << tempx << char(tempy + 65) << std::endl;
+			m->Shoot(tempx, tempy);
+			if (!(m->WasShipHit(tempx, tempy)))
+			{
+				if (EoSoM) {	//Ship sunk for sure
 					move = 0;
 					hits = 0;
 					shots = 0;
-					MakeMove(m);
-					return;
+					EoSoM = false;
 				}
-				else {				//first ship end rotate movement 
+				else {			//first ship end rotate movement 
 					EoSoM = true;
 					LastHit[0] = SecondHit;
 					LastHit[1] = FirstHit;
-					MakeMove(m);
-					return;
 				}
 			}
+			else {
+				LastHit[0] = LastHit[1]; //ship hit update last 2 coords 
+				LastHit[1].x = tempx;
+				LastHit[1].y = tempy;
+			}
+		}
+		else {					//end of map
+			if (EoSoM) {		//Ship sunk for sure 
+				move = 0;
+				hits = 0;
+				shots = 0;
+				EoSoM = false;
+				MakeMove(m);
+				return;
+			}
+			else {				//first ship end, rotate movement 
+				EoSoM = true;
+				LastHit[0] = SecondHit;
+				LastHit[1] = FirstHit;
+				MakeMove(m);
+				return;
+			}
+		}
 	}
 }

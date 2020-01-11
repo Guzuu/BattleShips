@@ -62,11 +62,11 @@ void Map::Shoot(int x, int y)
 
 void Map::DrawMap(Map *m1, Map *m2, int size)
 {
-	std::cout << m1->player->GetName();
-	for (int x = 0; x < size - m2->player->GetName().length() + 29; x++) {
+	std::cout << m1->player->GetName();	//prining first name
+	for (int x = 0; x < 4 * size - m1->player->GetName().length() + 11; x++) {
 		std::cout << " ";
 	}
-	std::cout << m2->player->GetName() << std::endl;
+	std::cout << m2->player->GetName() <<"\n ";	//printing 2nd name
 
 	for (int x = 0; x < size; x++) {  //Numbers first row
 		if (x > 9) {

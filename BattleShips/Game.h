@@ -21,6 +21,7 @@ public:
 
 private:
 
+	bool surrender = false;
 };
 
 #endif // !_Game_h

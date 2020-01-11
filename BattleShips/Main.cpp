@@ -17,7 +17,6 @@ void MainMenu(Game* g1)
 		MainMenu(g1);
 		break;
 	case 0:
-		std::cout << "Goodbye!\n";
 		g1->~Game();
 		break;
 	case 1:
