@@ -17,6 +17,7 @@ public:
 	int GetX();
 	int GetY();
 	bool GetPersp();
+	std::string GetShipName();
 	Player* GetOwner();
 
 	void SetX(int x);	//Setters

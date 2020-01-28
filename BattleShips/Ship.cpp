@@ -41,6 +41,11 @@ bool Ship::GetPersp()
 	return persp;
 }
 
+std::string Ship::GetShipName()
+{
+	return name;
+}
+
 Player* Ship::GetOwner()
 {
 	return owner;

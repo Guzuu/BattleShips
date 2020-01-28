@@ -23,7 +23,10 @@ void Human::MakeMove(Map *m)
 	//x--;	
 	y = (chy - 65);
 	
-	while (x < 0 || x >= m->GetSize() || y < 0 || y >= m->GetSize() || m->GetSectorCheck(x,y)) {
+	while (std::cin.fail() || x < 0 || x >= m->GetSize() || y < 0 || y >= m->GetSize() || m->GetSectorCheck(x,y)) {
+		std::cin.clear();
+		std::cin.ignore();
+
 		std::cout << "Location " << x << chy << " doesn't exist or sector has already been fired\n";
 		std::cout << name << ", choose your target coordinates again\n";
 		std::cin >> x >> chy;

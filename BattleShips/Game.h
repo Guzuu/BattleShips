@@ -21,6 +21,7 @@ public:
 
 private:
 
+	int shipSectors = 10;
 	bool surrender = false;
 };
 

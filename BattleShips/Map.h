@@ -27,6 +27,7 @@ public:
 	int AddShip(Ship* ship);
 	void Shoot(int x, int y);
 	static void DrawMap(Map *m1, Map *m2, int size);
+	static void DrawOneMap(Map* m1, int size);
 
 	Player* GetPlayer(); //Getters
 	int GetSize(); //returns size of the map
@@ -73,22 +74,46 @@ inline void Map::UserPlacement(T* ship)
 	int coordX;	//using for boolean perspective alignment also 
 	char coordY;
 
-	std::cout << "Pick alignment\n1 - Horizontal(__)\n0 - Vertical(|)\n";
+	std::cout << "Pick alignment for " << ship->GetShipName() <<" \n1 - Horizontal(__)\n0 - Vertical(| )\n";
+
 	std::cin >> coordX;
+	while (std::cin.fail()) {
+		std::cin.clear();
+		std::cin.ignore();
+		std::cout << "Something went wrong try again...\n";
+		std::cin >> coordX;
+	}
+	
 	while (coordX != 0 && coordX != 1) {
 		std::cout << "Couldnt determine alignment from " << coordX << ". Please try again\n";
 		std::cin >> coordX;
+		while (std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore();
+			std::cout << "Something went wrong try again...\n";
+			std::cin >> coordX;
+		}
 	}
 	ship->SetPersp(coordX);
 
 	std::cout << "\n Pick coords X and Y\n";
 	std::cin >> coordX >> coordY;
+	while (std::cin.fail()) {
+		std::cin.clear();
+		std::cin.ignore();
+		std::cout << "Something went wrong try again...\n";
+		std::cin >> coordX >> coordY;
+	}
+
 	ship->SetX(coordX);
 	ship->SetY(coordY-65);
 	
 	if (!AddShip(ship)) {
 		std::cout << "Couldnt Place ship at " << ship->GetX() << char(ship->GetY() + 65) << ". Please input valid coordinates\n";
 		UserPlacement(ship);
+	}
+	else {
+		Map::DrawOneMap(this, size);
 	}
 }
 

@@ -11,6 +11,15 @@ void MainMenu(Game* g1)
 
 	int x;
 	std::cin >> x;
+
+	while (std::cin.fail()) {
+		std::cin.clear();
+		std::cin.ignore();
+
+		std::cout << "Something went wrong try again...\n";
+		std::cin >> x;
+	}
+
 	switch (x) {
 	default:
 		std::cout << "Please choose valid option\n";

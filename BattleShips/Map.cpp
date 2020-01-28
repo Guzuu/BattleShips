@@ -51,6 +51,7 @@ void Map::Shoot(int x, int y)
 
 	if (map[x][y].occup && !map[x][y].chk) { //mark ship as hit
 		map[x][y].enemysymbol = 'X';
+		map[x][y].allysymbol = 'X';
 		map[x][y].ship->ShipHit();
 		map[x][y].chk = true;
 	}
@@ -96,8 +97,8 @@ void Map::DrawMap(Map *m1, Map *m2, int size)
 		}
 		std::cout << "|         ";
 		std::cout <<char(y + 65); //letters 2
-		for (int x = 0; x < size; x++) {
-			std::cout << "| " << m2->map[x][y].allysymbol << " "; //Rows of map 2
+		for (int x = 0; x < size; x++) {	//Rows of map 2
+			std::cout << "| " << m2->map[x][y].allysymbol << " "; 
 		}
 		std::cout << "|" << std::endl <<" ";
 	}
@@ -108,6 +109,36 @@ void Map::DrawMap(Map *m1, Map *m2, int size)
 	for (int x = 0; x < size; x++) { //last separating row 2
 		std::cout << "+---";
 	}
+	std::cout << "+" << std::endl;
+}
+
+void Map::DrawOneMap(Map* m1, int size)
+{
+	std::cout << m1->player->GetName() << "\n ";
+
+	for (int x = 0; x < size; x++) {  //Numbers first row
+		if (x > 9) {
+			std::cout << " " << x << " ";
+		}
+		else std::cout << "  " << x << " ";
+	}
+	
+	std::cout << " " << std::endl << " ";
+	for (int y = 0; y < size; y++) {
+		for (int x = 0; x < size; x++) { //separating row
+			std::cout << "+---";
+		}
+		std::cout << "+" << std::endl << char(y + 65); //letters
+		for (int x = 0; x < size; x++) {
+			std::cout << "| " << m1->map[x][y].allysymbol << " "; //Rows of map
+		}
+
+		std::cout << "|" << std::endl << " ";
+	}
+	for (int x = 0; x < size; x++) { //last separating row
+		std::cout << "+---";
+	}
+
 	std::cout << "+" << std::endl;
 }
 
